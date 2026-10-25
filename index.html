@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agents | BizOS by Evomoda</title>
+<meta name="description" content="Ready-made AI agents built on n8n workflows: WhatsApp assistant, lead follow-ups, SEO + AI search, social media manager and website chatbot. Get yours.">
+<link rel="canonical" href="https://bizos.evomoda.website/agents/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0e10;--panel:#1f1f22;--node:#2b2b2f;--node-b:#3a3a40;--txt:#f4f4f5;--mut:#a1a1aa;--pink:#ff9fb7;--pink-d:#ff6d8f;--wire:#6b6b73}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+nav{display:flex;align-items:center;justify-content:space-between;margin:16px 0;padding:10px 12px 10px 22px;background:#f4f4f5;color:#111;border-radius:16px}
+.logo{font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.02em}.logo span{color:var(--pink-d)}
+.links{display:flex;gap:28px;font:500 14px "JetBrains Mono",monospace;letter-spacing:.04em}
+.links a{text-decoration:none}
+.cta{background:var(--pink);color:#111;border:0;border-radius:12px;padding:12px 20px;font:600 14px "JetBrains Mono",monospace;letter-spacing:.04em;text-decoration:none;cursor:pointer}
+.cta:hover{background:var(--pink-d)}
+@media(max-width:760px){.links{display:none}}
+.hero{text-align:center;padding:56px 0 36px}
+.hero h1{font-size:clamp(34px,6vw,64px);line-height:1.05;letter-spacing:-.03em;margin:0 0 16px;font-weight:700}
+.hero p{color:var(--mut);max-width:620px;margin:0 auto;font-size:18px}
+.show{background:var(--panel);border-radius:28px;padding:22px;margin-bottom:28px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tab{background:#2a2a2e;color:var(--mut);border:0;border-radius:999px;padding:10px 18px;font:500 13px "JetBrains Mono",monospace;cursor:pointer;letter-spacing:.02em}
+.tab.on{background:var(--pink);color:#111}
+.stage{display:grid;grid-template-columns:minmax(260px,1fr) 2fr;gap:24px;align-items:center;min-height:460px}
+@media(max-width:900px){.stage{grid-template-columns:1fr}}
+.copy{padding:24px 16px}
+.copy h2{font-size:clamp(30px,4vw,48px);line-height:1.08;letter-spacing:-.025em;margin:0 0 18px;font-weight:700}
+.copy p{font-size:18px;margin:0 0 26px;color:#e4e4e7}
+.copy .go{background:none;border:0;color:var(--txt);font:500 18px Inter,sans-serif;padding:0 0 4px;border-bottom:1px solid var(--txt);cursor:pointer}
+.copy .go:hover{color:var(--pink);border-color:var(--pink)}
+.canvas{background-image:radial-gradient(circle,#3a3a40 1.2px,transparent 1.3px);background-size:22px 22px;border-radius:16px;overflow-x:auto}
+.canvas svg{display:block;width:100%;min-width:640px;height:auto}
+.n rect{fill:var(--node);stroke:var(--node-b);stroke-width:1}
+.n.ai rect{stroke:var(--pink);stroke-width:1.5}
+.n text.ic{font-size:30px;text-anchor:middle;dominant-baseline:central}
+.n text.lb{fill:#d4d4d8;font:500 12.5px Inter,sans-serif;text-anchor:middle}
+.n text.sb{fill:var(--mut);font:400 11px "JetBrains Mono",monospace;text-anchor:middle}
+.w{fill:none;stroke:var(--wire);stroke-width:1.6}
+.port{fill:#52525b}
+.plus rect{fill:#2b2b2f;stroke:var(--node-b)}.plus text{fill:#d4d4d8;font-size:20px;text-anchor:middle;dominant-baseline:central}
+.fade{animation:f .45s ease}@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;padding:28px 0 56px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.grid2 h3{font-size:34px;letter-spacing:-.02em;margin:0 0 10px;line-height:1.1}.grid2 .lead{color:var(--mut);font-size:17px}
+.chat{display:flex;flex-direction:column;height:440px;background:var(--panel);border-radius:22px;overflow:hidden}
+.log{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:85%;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word;font-size:15px}
+.m.a{background:#2b2b2f;align-self:flex-start}.m.u{background:var(--pink);color:#111;align-self:flex-end}
+.cf{display:flex;gap:8px;padding:12px;border-top:1px solid #2e2e33}
+input,textarea{width:100%;background:#151517;border:1px solid #34343a;color:var(--txt);border-radius:12px;padding:12px 14px;font:inherit;min-width:0}
+dialog{background:var(--panel);color:var(--txt);border:1px solid #34343a;border-radius:22px;padding:26px;width:min(440px,92vw)}
+dialog::backdrop{background:#000b}dialog h3{margin:0 0 4px;font-size:22px}dialog form{display:grid;gap:10px;margin-top:16px}
+.row{display:flex;gap:8px;justify-content:flex-end}.msg{font-size:14px;color:var(--mut)}
+.ghost{background:transparent;color:var(--txt);border:1px solid #3a3a40}
+footer{border-top:1px solid #26262a;padding:26px 0;color:var(--mut);text-align:center;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a class="logo" href="https://bizos.evomoda.website/">Biz<span>OS</span></a>
+  <div class="links"><a href="#agents">AGENTS</a><a href="#custom">CUSTOM</a><a href="https://wa.me/918368883484">CONTACT</a><a href="https://app.evomoda.website/login">SIGN IN</a></div>
+  <button class="cta" data-get>GET YOURS</button></nav>
+
+<section class="hero">
+  <h1>AI agents that run<br>your business 24x7</h1>
+  <p>Ready-made n8n workflows, set up for you in days. Pick an agent below.</p>
+</section>
+
+<section class="show" id="agents">
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="stage">
+    <div class="copy" id="copy"></div>
+    <div class="canvas"><svg id="flow" viewBox="0 0 1000 440" role="img"></svg></div>
+  </div>
+</section>
+
+<section class="grid2" id="custom">
+  <div><h3>Need a custom workflow?</h3><p class="lead">Tell our AI consultant what you want to automate. It will suggest the right agent and our team will WhatsApp you.</p>
+    <button class="cta" data-get style="margin-top:12px">GET YOURS</button></div>
+  <div class="chat">
+    <div class="log" id="log" aria-live="polite"></div>
+    <form class="cf" id="cf"><input id="in" placeholder="What do you want to automate?" autocomplete="off" maxlength="2000"><button class="cta" id="send">SEND</button></form>
+  </div>
+</section>
+</div>
+
+<dialog id="dlg">
+  <h3 id="dt">Get your agent</h3>
+  <div class="msg">We'll WhatsApp you within 24 hours.</div>
+  <form id="lf">
+    <input name="name" placeholder="Your name" required maxlength="150">
+    <input name="phone" placeholder="WhatsApp number" required inputmode="tel" maxlength="20">
+    <input name="email" type="email" placeholder="Email (optional)">
+    <input name="business" placeholder="Your business (e.g. salon, garments)" maxlength="150">
+    <textarea name="note" rows="2" placeholder="Anything specific? (optional)" maxlength="1000"></textarea>
+    <div class="msg" id="lmsg"></div>
+    <div class="row"><button type="button" class="cta ghost" id="cancel">CANCEL</button><button class="cta" id="lsub">GET YOURS</button></div>
+  </form>
+</dialog>
+
+<footer>BizOS by Evomoda · Delhi, India · <a href="https://wa.me/918368883484">WhatsApp +91 83688 83484</a> · <a href="https://instagram.com/bizosbyevomoda">@bizosbyevomoda</a></footer>
+
+<script>
+const BASE="https://bizos-api-v2.onrender.com/api/public",ORG="5fea8e74-cb00-4d06-a2ab-588f5c18d2f1";
+// nodes: [id, x, y, icon, label, sub, ai?]  edges: [from, to]
+const A=[
+ {tab:"WhatsApp Assistant",title:"Your WhatsApp replies itself, 24x7",
+  text:"Customer messages are understood by AI, answered instantly, and every chat becomes a lead in your CRM.",
+  nodes:[["t",70,230,"💬","On New Message","WhatsApp"],["ai",230,230,"🤖","Understand Intent","Claude AI",1],["faq",400,120,"📄","Answer FAQ","Reply: Text"],["qr",400,340,"💳","Send Payment QR","UPI"],["bk",570,230,"📅","Book Appointment","Calendar"],["crm",740,230,"🗂️","Save Lead","BizOS CRM"],["rp",900,230,"✅","Send Confirmation","WhatsApp"]],
+  edges:[["t","ai"],["ai","faq"],["ai","qr"],["faq","bk"],["qr","bk"],["bk","crm"],["crm","rp"]]},
+ {tab:"Lead Gen & Follow-ups",title:"Leads found, emailed and followed up",
+  text:"The agent finds prospects, writes a personal email for each one and follows up until they book a call.",
+  nodes:[["t",70,230,"⏰","Every Morning","Schedule"],["mp",230,120,"📍","Find Leads","Google Maps"],["li",230,340,"🔗","Find Leads","LinkedIn"],["mg",390,230,"🔀","Combine","Merge"],["ai",550,230,"🤖","Write Email","Claude AI",1],["em",710,230,"📧","Send Email","Gmail"],["fu",870,230,"🔁","Follow-up","Day 1 · 3 · 7"]],
+  edges:[["t","mp"],["t","li"],["mp","mg"],["li","mg"],["mg","ai"],["ai","em"],["em","fu"]]},
+ {tab:"SEO + AI Search",title:"Found on Google and in ChatGPT answers",
+  text:"Every week the agent checks your rankings, improves your pages for search and AI engines, and sends a report.",
+  nodes:[["t",70,230,"🗓️","Every Week","Schedule"],["kw",230,120,"🔍","Check Keywords","Search Console"],["cp",230,340,"🕵️","Competitors","Scrape"],["ai",410,230,"🤖","Optimise Pages","Claude AI",1],["wp",580,120,"🌐","Update Site","WordPress"],["ix",580,340,"📡","Request Indexing","IndexNow"],["rp",780,230,"📊","Weekly Report","WhatsApp"]],
+  edges:[["t","kw"],["t","cp"],["kw","ai"],["cp","ai"],["ai","wp"],["ai","ix"],["wp","rp"],["ix","rp"]]},
+ {tab:"Social Media Manager",title:"Fresh posts every day, without the effort",
+  text:"The agent spots trending topics in your niche, writes the post and image, and publishes to Instagram and Facebook.",
+  nodes:[["t",70,230,"🔥","Trending Topics","Daily"],["ai",240,230,"🤖","Write Post","Claude AI",1],["img",410,230,"🎨","Create Image","Design"],["ig",590,120,"📸","Post","Instagram"],["fb",590,340,"👍","Post","Facebook"],["st",780,230,"📈","Track Results","Insights"]],
+  edges:[["t","ai"],["ai","img"],["img","ig"],["img","fb"],["ig","st"],["fb","st"]]},
+ {tab:"Website Chatbot",title:"Website visitors turned into enquiries",
+  text:"An AI chat on your site answers questions any time, collects name and number, and alerts you on WhatsApp.",
+  nodes:[["t",70,230,"🌐","Visitor Asks","Website Chat"],["ai",240,230,"🤖","Answer","Claude AI",1],["cap",410,230,"📝","Capture Details","Name · Phone"],["crm",590,120,"🗂️","Create Lead","BizOS CRM"],["wa",590,340,"🔔","Alert Owner","WhatsApp"],["fu",780,230,"✉️","Auto Follow-up","Email"]],
+  edges:[["t","ai"],["ai","cap"],["cap","crm"],["cap","wa"],["crm","fu"],["wa","fu"]]}];
+
+const H=46,svg=document.getElementById("flow"),tabs=document.getElementById("tabs"),copy=document.getElementById("copy");
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let cur=0,timer;
+function draw(i){
+  cur=i;const a=A[i],pos={};a.nodes.forEach(n=>pos[n[0]]=n);
+  tabs.querySelectorAll(".tab").forEach((t,j)=>{t.classList.toggle("on",j==i);t.setAttribute("aria-selected",j==i)});
+  copy.innerHTML=`<div class="fade"><h2>${esc(a.title)}</h2><p>${esc(a.text)}</p><button class="go" data-get="${i}">Get yours</button></div>`;
+  let w="",n="";
+  a.edges.forEach(([f,t])=>{const p=pos[f],q=pos[t],x1=p[1]+H,y1=p[2],x2=q[1]-H,y2=q[2],m=(x1+x2)/2;
+    w+=`<path class="w" d="M${x1},${y1} C${m},${y1} ${m},${y2} ${x2},${y2}"/><circle class="port" cx="${x1}" cy="${y1}" r="4"/><circle class="port" cx="${x2}" cy="${y2}" r="4"/>`;});
+  a.nodes.forEach(([id,x,y,ic,lb,sb,ai])=>{n+=`<g class="n${ai?" ai":""}"><rect x="${x-H}" y="${y-H}" width="${H*2}" height="${H*2}" rx="${id=="t"?H:16}"/><text class="ic" x="${x}" y="${y}">${ic}</text><text class="lb" x="${x}" y="${y+H+20}">${esc(lb)}</text><text class="sb" x="${x}" y="${y+H+36}">${esc(sb)}</text></g>`;});
+  const last=a.nodes[a.nodes.length-1];
+  n+=`<path class="w" d="M${last[1]+H},${last[2]} H${last[1]+H+28}"/><g class="plus"><rect x="${last[1]+H+28}" y="${last[2]-14}" width="28" height="28" rx="6"/><text x="${last[1]+H+42}" y="${last[2]}">+</text></g>`;
+  svg.setAttribute("aria-label",a.tab+" workflow: "+a.nodes.map(x=>x[4]).join(", "));
+  svg.innerHTML=`<g class="fade">${w}${n}</g>`;
+}
+tabs.innerHTML=A.map((a,i)=>`<button class="tab" role="tab" data-i="${i}">${esc(a.tab)}</button>`).join("");
+tabs.onclick=e=>{const b=e.target.closest(".tab");if(b){clearInterval(timer);draw(+b.dataset.i);}};
+draw(0);timer=setInterval(()=>draw((cur+1)%A.length),7000);
+
+const dlg=document.getElementById("dlg"),lf=document.getElementById("lf"),lmsg=document.getElementById("lmsg");let pick="";
+document.addEventListener("click",e=>{const b=e.target.closest("[data-get]");if(!b)return;
+  pick=b.dataset.get!==""&&b.dataset.get!==undefined?A[+b.dataset.get].tab:"AI Agent";
+  document.getElementById("dt").textContent="Get your "+pick;lmsg.textContent="";dlg.showModal();});
+document.getElementById("cancel").onclick=()=>dlg.close();
+lf.onsubmit=async e=>{e.preventDefault();const f=new FormData(lf),sb=document.getElementById("lsub");sb.disabled=true;lmsg.textContent="Sending…";
+  const body={org_key:ORG,name:f.get("name").trim(),phone:f.get("phone").trim(),source:"agents-page",
+    message:`Wants: ${pick}\nBusiness: ${f.get("business")||"-"}\n${f.get("note")||""}`};
+  if(f.get("email"))body.email=f.get("email").trim();
+  try{const r=await fetch(BASE+"/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});if(!r.ok)throw 0;
+    lmsg.textContent="✅ Done! Our team will WhatsApp you soon.";lf.reset();setTimeout(()=>dlg.close(),2500);
+  }catch(_){lmsg.innerHTML='Could not send. Please <a href="https://wa.me/918368883484">WhatsApp us</a>.';}
+  sb.disabled=false;};
+
+const log=document.getElementById("log"),inp=document.getElementById("in"),sendB=document.getElementById("send");let msgs=[];
+function add(r,t){const d=document.createElement("div");d.className="m "+(r=="user"?"u":"a");d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+add("assistant","Hi! 👋 What does your business do, and what would you like to automate?");
+document.getElementById("cf").onsubmit=async e=>{e.preventDefault();const t=inp.value.trim();if(!t||sendB.disabled)return;
+  add("user",t);msgs.push({role:"user",content:t});inp.value="";sendB.disabled=true;const w=add("assistant","…");
+  try{const r=await fetch(BASE+"/agent-chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({org_key:ORG,messages:msgs.slice(-40)})});
+    if(!r.ok)throw 0;const j=await r.json();w.textContent=j.reply;msgs.push({role:"assistant",content:j.reply});
+  }catch(_){w.textContent="Connection issue. Please WhatsApp us at +91 83688 83484.";msgs.pop();}
+  sendB.disabled=false;inp.focus();};
+</script>
+</body>
+</html>
